@@ -1,15 +1,27 @@
-import React,{ useContext } from 'react'
+import React,{ useContext,useState } from 'react'
 import Status  from '../api/Status';
 
 function Login(){
 	
-	const statContext = useContext(Status);
-	
+	const statContext									 = useContext(Status);
+	const [defaultData,setDefaultData] = useState([]);
+
+	const disabled = statContext.isLogin ? 'disabled' : '';
+
 	function changeHandler(){
-		 statContext.setStatus(true);
+		 statContext.setStatus(true); // global state
 	};
 
-	console.log('login',statContext);
+	function handleInput(event){
+			setDefaultData({...defaultData ,[event.target.name]:event.target.value});
+	}
+
+	function handleSubmit(){
+		console.log(defaultData)
+	}
+
+
+	console.log('login',statContext,disabled);
 	
 	return (
 		<>
@@ -24,18 +36,18 @@ function Login(){
 						<div className="mb-3 row">
 					    <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email/Username</label>
 					    <div className="col-sm-10">
-					      <input type="text" className="form-control" placeholder="email@example.com/Username" />
+					      <input type="text" className="form-control" disabled={disabled} placeholder="email@example.com/Username" onChange={handleInput} name="mail" value={defaultData && defaultData.mail} />
 					    </div>
 					  </div>
 					  <div className="mb-3 row">
 					    <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
 					    <div className="col-sm-10">
-					      <input type="password" className="form-control" id="inputPassword" />
+					      <input type="password" className="form-control" disabled={disabled} onChange={handleInput} name="pass" value={defaultData && defaultData.pass} id="inputPassword" />
 					    </div>
 					   </div>
 					   <div className="m-3 row">
 					    <p>{statContext.isLogin ? 'Already Login' : 'Not Logged In' }</p>
-					    <button className="btn btn-primary btn-lg m-1" onClick={changeHandler}>Login</button>
+					    <button className="btn btn-primary btn-lg m-1" disabled={disabled}  onClick={changeHandler}>Login</button>
 					   </div>
 				  </div>
 				</div>

@@ -6,7 +6,7 @@ function ProductForm(){
 	const backend     = Backend();
 	const DEFAULT_IMG = 'https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=360&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%20360w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=740&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%20740w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=826&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%20826w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=900&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%20900w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=996&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%20996w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=1060&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%201060w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=1380&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%201380w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=1480&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%201480w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=1800&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%201800w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=2000&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%202000w';
 	const [defaultData,setDefaultData] = useState([]);
-
+	
 	useEffect(()=>{
 			const path = window.location.pathname !== '/admin/add' ? true : false;
 			const id   = path ? window.location.pathname.split('/')[2] : [];
@@ -15,12 +15,23 @@ function ProductForm(){
 											}) : false
 		
 			data !== false && setDefaultData(data[0])
-			console.log(data)
 			return(()=>{
-				return true
+				return [data]
 			})								 
 	},[backend.data]);
 	
+	function handleInput(event){
+		setDefaultData({...defaultData ,[event.target.name]:event.target.value});
+	}
+
+	function handleFileSubmit(event){
+		console.log(event)
+	}
+
+	function handleSubmit(){
+		console.log(defaultData)
+	}
+
 	return (
 		<>
 		<div className="container">
@@ -34,26 +45,26 @@ function ProductForm(){
 						<div className="mb-3 row">
 					    <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Title</label>
 					    <div className="col-sm-10">
-					      <input type="text" className="form-control" placeholder="Product A" value={defaultData && defaultData.title} />
+					      <input type="text" className="form-control" placeholder="Product A" onChange={handleInput} name="title"  value={defaultData && defaultData.title} />
 					    </div>
 					  </div>
 					  <div className="mb-3 row">
 					    <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Price</label>
 					    <div className="col-sm-2">
-					      <input type="number" className="form-control" placeholder="Php 100" value={defaultData && defaultData.price} />
+					      <input type="number" className="form-control" placeholder="Php 100" onChange={handleInput} name="price" value={defaultData && defaultData.price } />
 					    </div>
 					  </div>
 					   <div className="mb-3 row">
 					    <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Image</label>
 					    <div className="col-sm-10">
-  							<input className="form-control" type="file" id="formFile" />
+  							<input className="form-control" type="file" id="formFile" name="file" onChange={handleFileSubmit} />
 					    </div>
 					     <div className="col-sm-10 m-5">
   							<img src={defaultData ? defaultData.image : DEFAULT_IMG} className="img-file" alt="no-data"/>
 					    </div>
 					  </div>
 					   <div className="m-3 row">
-					    <button className="btn btn-primary btn-lg m-1">{defaultData ? 'UPDATE' : 'ADD' }</button>
+					    <button className="btn btn-primary btn-lg m-1" onClick={handleSubmit}>{defaultData ? 'UPDATE' : 'ADD' }</button>
 					   </div>
 				  </div>
 				</div>
