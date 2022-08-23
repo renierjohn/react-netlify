@@ -6,10 +6,11 @@ import Status  from '../api/Status';
 
 function Admin(){
 	
-	const data    = Backend();
+	const backEnd     = Backend();
+	const data        = backEnd.data;
 	const statContext = useContext(Status);
 
-	console.log('admin',statContext)
+	console.log('admin',statContext,backEnd)
 
 	return (
 	<>

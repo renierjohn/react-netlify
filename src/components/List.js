@@ -2,8 +2,8 @@ import React from 'react'
 import Backend from '../api/Backend';
 
 function List(){
-	const datas = Backend();
-
+	const backEnd     = Backend();
+	const datas       = backEnd.data;
 	return (
 	<>
 		<div className="row mb-3">
