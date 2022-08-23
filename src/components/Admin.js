@@ -8,14 +8,18 @@ function Admin(){
 		<div className="row mb-3">
 		<div className="col-lg">
 			<ul className="list-group">
+				
 				{
 					datas.map((data,key)=>{
 						return <li className="list-group-item" key={key} id={data.id}>
-
-							{data.title}
-							<div className="d-flex">
-								<button className="btn btn-primary">EDIT</button>
-								<button className="btn btn-warning">DELETE</button>
+						<div className="row"> 
+								<div className="col-8">
+									{data.title}
+								</div>
+								<div className="col-4">
+									<button className="btn btn-primary">EDIT</button>
+									<button className="btn btn-warning">DELETE</button>
+								</div>
 							</div>
 						</li>
 					})
