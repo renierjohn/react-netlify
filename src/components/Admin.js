@@ -1,10 +1,16 @@
-import React from 'react'
+import React,{ useContext } from 'react'
 import { Link } from "react-router-dom";
 
 import Backend from '../api/Backend';
+import Status  from '../api/Status';
 
 function Admin(){
-	const datas = Backend();
+	
+	const data    = Backend();
+	const statContext = useContext(Status);
+
+	console.log('admin',statContext)
+
 	return (
 	<>
   	<div className="row mb-3">
@@ -16,7 +22,7 @@ function Admin(){
 		<div className="col-lg">
 			<ul className="list-group">
 				{
-					datas.map((data,key)=>{
+					data.map((data,key)=>{
 						return <li className="list-group-item shadow-sm p-3 mb-2 bg-body rounded" key={key} id={data.id}>
 						<div className="row"> 
 								<div className="col-8">

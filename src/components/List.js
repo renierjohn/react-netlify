@@ -11,7 +11,7 @@ function List(){
 			<ul className="list-group">
 				{
 					datas.map((data,key)=>{
-						return <li class="list-group-item shadow-sm p-3 mb-2 bg-body rounded" key={key} id={data.id}>{data.title}</li>
+						return <li className="list-group-item shadow-sm p-3 mb-2 bg-body rounded" key={key} id={data.id}>{data.title}</li>
 					})
 				}
 			</ul>

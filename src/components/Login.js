@@ -1,6 +1,16 @@
-import React from 'react'
+import React,{ useContext } from 'react'
+import Status  from '../api/Status';
 
 function Login(){
+	
+	const statContext = useContext(Status);
+	
+	function changeHandler(){
+		 statContext.setStatus(true);
+	};
+
+	console.log('login',statContext);
+	
 	return (
 		<>
 		<div className="container">
@@ -12,19 +22,20 @@ function Login(){
 				<div className="row">	
 					<div className="col-lg shadow-lg p-3 mb-2 bg-body rounded">
 						<div className="mb-3 row">
-					    <label for="staticEmail" className="col-sm-2 col-form-label">Email/Username</label>
+					    <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email/Username</label>
 					    <div className="col-sm-10">
 					      <input type="text" className="form-control" placeholder="email@example.com/Username" />
 					    </div>
 					  </div>
 					  <div className="mb-3 row">
-					    <label for="inputPassword" className="col-sm-2 col-form-label">Password</label>
+					    <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
 					    <div className="col-sm-10">
 					      <input type="password" className="form-control" id="inputPassword" />
 					    </div>
 					   </div>
 					   <div className="m-3 row">
-					    <button className="btn btn-primary btn-lg m-1">Login</button>
+					    <p>{statContext.isLogin ? 'Already Login' : 'Not Logged In' }</p>
+					    <button className="btn btn-primary btn-lg m-1" onClick={changeHandler}>Login</button>
 					   </div>
 				  </div>
 				</div>
