@@ -1,9 +1,12 @@
-import React from 'react'
-import Backend from '../api/Backend';
+import React,{ useContext } from 'react'
+// import Backend from '../api/Backend';
+import Status  from '../api/Status';
 
 function List(){
-	const backEnd     = Backend();
-	const datas       = backEnd.data;
+	// const backEnd     = Backend();
+	// const datas       = backEnd.data;
+	const statContext = useContext(Status);
+	const datas       = statContext.dataContext;
 	return (
 	<>
 		<div className="row mb-3">

@@ -8,20 +8,16 @@ function Login(){
 
 	const disabled = statContext.isLogin ? 'disabled' : '';
 
-	function changeHandler(){
-		 statContext.setStatus(true); // global state
-	};
-
 	function handleInput(event){
 			setDefaultData({...defaultData ,[event.target.name]:event.target.value});
 	}
 
-	// function handleSubmit(){
-	// 	console.log(defaultData)
-	// }
+	function handleSubmit(){
+	  statContext.setStatus(true); // global state
+		console.log(defaultData)
+	}
 
-
-	console.log('login',statContext,disabled);
+	// console.log('login',statContext,disabled);
 	
 	return (
 		<>
@@ -47,7 +43,7 @@ function Login(){
 					   </div>
 					   <div className="m-3 row">
 					    <p>{statContext.isLogin ? 'Already Login' : 'Not Logged In' }</p>
-					    <button className="btn btn-primary btn-lg m-1" disabled={disabled}  onClick={changeHandler}>Login</button>
+					    <button className="btn btn-primary btn-lg m-1" disabled={disabled}  onClick={handleSubmit}>Login</button>
 					   </div>
 				  </div>
 				</div>

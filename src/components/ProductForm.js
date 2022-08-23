@@ -1,36 +1,42 @@
-import React,{ useState,useEffect } from 'react'
-import Backend from '../api/Backend';
+import React,{ useState,useEffect,useContext } from 'react'
+// import Backend from '../api/Backend';
+import Status  from '../api/Status';
 
 function ProductForm(){
 	
-	const backend     = Backend();
+	// const backend     = Backend();
+	const statContext = useContext(Status);
 	const DEFAULT_IMG = 'https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=360&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%20360w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=740&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%20740w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=826&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%20826w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=900&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%20900w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=996&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%20996w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=1060&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%201060w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=1380&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%201380w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=1480&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%201480w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=1800&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%201800w,%20https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=2000&t=st=1661237280~exp=1661237880~hmac=94b092d0dedd92ebe10526eb60954ca3372018cf7545a98581260ba04e3cf51a%202000w';
-	const [defaultData,setDefaultData] = useState([]);
+	const [defaultData,setDefaultData] = useState({title:'',price:'',image:DEFAULT_IMG,fid:false});
 	
 	useEffect(()=>{
 			const path = window.location.pathname !== '/admin/add' ? true : false;
-			const id   = path ? window.location.pathname.split('/')[2] : [];
-			const data = id ? backend.data.filter((dat,key) => {
-												return dat.id === Number(id) 
-											}) : false
+			const id   = path === true ? window.location.pathname.split('/')[2] : false;
+			const data = id !== false  ? statContext.dataContext.filter((dat,key) => {
+															return dat.id === Number(id) 
+														}) : false
 		
 			data !== false && setDefaultData(data[0])
+
 			return(()=>{
-				return [data]
+				return data;
 			})								 
-	},[backend.data]);
+	},[statContext.dataContext]);
 	
 	function handleInput(event){
 		setDefaultData({...defaultData ,[event.target.name]:event.target.value});
 	}
 
 	function handleFileSubmit(event){
-		console.log(event)
+		console.log(event.target.files)
+		setDefaultData({title:defaultData.title,price:defaultData.price,image:'https://4.img-dpreview.com/files/p/TS1200x900~sample_galleries/1330372094/7004100121.jpg',fid:123})
 	}
 
 	function handleSubmit(){
 		console.log(defaultData)
 	}
+
+	// console.log(defaultData)
 
 	return (
 		<>

@@ -6,33 +6,50 @@ import Login  from './components/Login';
 import Form   from './components/ProductForm';
 import Header from './components/Header';
 
-import Status from './api/Status';
+import StatusA from './api/Status';
+// import StatusB from './api/Status';
+import Backend from './api/Backend';
 
 import { Routes, Route } from "react-router-dom";
 import React,{useState,useMemo} from 'react'
 
 
 function App() {
-  const [isLogin, setStatus] = useState(false);
+  const backend                       = Backend();
+  const [isLogin, setStatus]          = useState(backend.checkLogin());
+  const [dataContext, setDataContext] = useState(backend.FetchContent());
+  
   const value = useMemo(
-    () => ({ isLogin, setStatus }), 
-    [isLogin]
+    () => ({ isLogin, setStatus,dataContext,setDataContext  }), 
+    [isLogin,dataContext]
   );
+
+  // const valueA = useMemo(
+  //   () => ({ isLogin, setStatus }), 
+  //   [isLogin]
+  // );
+
+  // const valueB = useMemo(
+  //   () => ({  dataContext,setDataContext }), 
+  //   [dataContext]
+  // );
 
   return (
       <div className="App">
-        <Status.Provider value={value} >
+        <StatusA.Provider value={value} >
           <Header />
           <div className="container">
           <Routes>
-            <Route path="/" element={<List />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/add" element={<Form />} />
-            <Route path="/admin/:id/edit" element={<Form />} />
-            <Route path="/login" element={<Login />} />
+          {/*  <StatusB.Provider value={valueB} > */}
+              <Route path="/" element={<List />} />
+              <Route path="/admin" element={<Admin />} />
+           {/* </StatusB.Provider> */} 
+              <Route path="/admin/add" element={<Form />} />
+              <Route path="/admin/:id/edit" element={<Form />} />
+              <Route path="/login" element={<Login />} />
           </Routes>
           </div>      
-        </ Status.Provider>
+        </ StatusA.Provider>
       </div>
   );
 }

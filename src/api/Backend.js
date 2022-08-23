@@ -11,6 +11,16 @@ function Backend(){
 		data:data,
 		uploadFile:() =>{
 			return true;
+		},
+		checkLogin:  ()=>{
+			fetch('https//renifysite.com').then((res) => res.json()).then((res) => {return res}).catch(() 	=> {return false});
+			console.log('checkLogin:')
+			return true;
+		},
+		FetchContent: ()=>{
+			fetch('https//renifysite.com/api/').then((res) => res.json()).then((res) => {return res}).catch(() 	=> {return false});
+			console.log('fetchContent:')
+			return data;
 		}
 	}
 }

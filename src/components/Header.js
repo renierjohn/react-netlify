@@ -6,8 +6,8 @@ import Status  from '../api/Status';
 function Header(){
 	
 	const statContext = useContext(Status);
-	
-	console.log('header',statContext);
+
+	// console.log('header',statContext);
 
 	return (
 		<>
