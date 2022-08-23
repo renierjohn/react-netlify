@@ -1,6 +1,5 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Tooltip, Toast, Popover } from 'bootstrap'
 
 import Header from './components/Header';
 import List from './components/List';

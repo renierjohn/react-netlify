@@ -1,4 +1,3 @@
-import {useStae,useEffect} from 'react';
 
 const data = [
 	{id:1,title:'Product1'},
