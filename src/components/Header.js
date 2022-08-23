@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Header(){
 	const [isLogin,setIsLogin] = useState(false);
-	
+
 	return (
 		<>
 		<nav className="navbar navbar-expand-lg bg-light mb-3">
@@ -15,7 +15,7 @@ function Header(){
 				</ul>
 				<div className="d-flex" role="search">
 					{ 
-						!isLogin ? <Link className="btn btn-outline-success" aria-current="page" to="/login">Login</Link> : <button className="btn btn-outline-success" onClick={()=>{ console.log('logout')}}>Logout</button>
+						!isLogin ? <Link className="btn btn-outline-success" aria-current="page" to="/login">Login</Link> : <button className="btn btn-outline-success" onClick={()=>{setIsLogin(false)}}>Logout</button>
 					}
 	      </div>
 			</div>
