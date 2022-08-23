@@ -16,9 +16,9 @@ function Login(){
 			setDefaultData({...defaultData ,[event.target.name]:event.target.value});
 	}
 
-	function handleSubmit(){
-		console.log(defaultData)
-	}
+	// function handleSubmit(){
+	// 	console.log(defaultData)
+	// }
 
 
 	console.log('login',statContext,disabled);
