@@ -16,7 +16,7 @@ function Backend(){
 	return {
 		data:data,
 		uploadFile: async () =>{
-			const data = await axios_plus(HOST+AUTH_ENDPOINT);
+			const data = await axios_plus(HOST+FILE_ENPOINT);
 			console.log('checkLogin:',data);
 			return data;
 		},
