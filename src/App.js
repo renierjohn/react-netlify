@@ -15,14 +15,20 @@ import { Routes, Route } from "react-router-dom";
 import React,{useState,useMemo,useEffect} from 'react'
 
 function App() {
+
   const backend                       = Backend();
-  const [isLogin, setStatus]          = useState(false);
   const [dataContext, setDataContext] = useState([]);
- 
+  const [isLogin, setStatus]          = useState(false);
+  
   useEffect(()=>{
-    backend.checkLogin().then((res)=>{setStatus(res)});
-    backend.FetchContent().then((res) =>{setDataContext(res)});
-  },[backend.data]);
+  
+    return(()=>{
+      backend.checkLogin().then((res)=>{setStatus(res)});
+      backend.FetchContent().then((res) =>{setDataContext(res)});
+
+    })
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   const value = useMemo(
     () => ({ isLogin, setStatus,dataContext,setDataContext  }), 
