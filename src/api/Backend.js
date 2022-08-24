@@ -5,8 +5,8 @@ const data = [
 	{id:3 , title:'Product3' , price:400 ,  image:'https://4.img-dpreview.com/files/p/TS1200x900~sample_galleries/1330372094/7004100121.jpg' },		
 ]
 
-// const HOST             = 'http://localhost:8888';
-const HOST             = 'https://code-ph.com';
+const HOST             = 'http://localhost:8888';
+// const HOST             = 'https://code-ph.com';
 
 const FILE_ENPOINT     = '/api/rest/file';
 const CONTENT_ENDPOINT = '/api/rest/products';

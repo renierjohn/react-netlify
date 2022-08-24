@@ -22,7 +22,7 @@ function App() {
   useEffect(()=>{
     backend.checkLogin().then((res)=>{setStatus(res)});
     backend.FetchContent().then((res) =>{setDataContext(res)});
-  },[backend]);
+  },[backend.data]);
 
   const value = useMemo(
     () => ({ isLogin, setStatus,dataContext,setDataContext  }), 
