@@ -11,7 +11,7 @@ function Header(){
 
 	return (
 		<>
-		<nav className="navbar navbar-expand-lg bg-light mb-3">
+		<nav className="navbar navbar-expand-lg bg-gray mb-3">
 			<div className="container-fluid">
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul className="navbar-nav me-auto mb-2 mb-lg-0">

@@ -5,24 +5,37 @@ const data = [
 	{id:3 , title:'Product3' , price:400 ,  image:'https://4.img-dpreview.com/files/p/TS1200x900~sample_galleries/1330372094/7004100121.jpg' },		
 ]
 
+// const HOST             = 'http://localhost:8888';
+const HOST             = 'https://code-ph.com';
+
+const FILE_ENPOINT     = '/api/rest/file';
+const CONTENT_ENDPOINT = '/api/rest/products';
+const AUTH_ENDPOINT    = '/api/v1/auth/token';
 
 function Backend(){
 	return {
 		data:data,
-		uploadFile:() =>{
-			return true;
+		uploadFile: async () =>{
+			const data = await axios_plus(HOST+AUTH_ENDPOINT);
+			console.log('checkLogin:',data);
+			return data;
 		},
-		checkLogin:  ()=>{
-			fetch('https//renifysite.com').then((res) => res.json()).then((res) => {return res}).catch(() 	=> {return false});
-			console.log('checkLogin:')
-			return true;
+		checkLogin:async ()=>{
+			const data = await axios_plus(HOST+AUTH_ENDPOINT);
+			console.log('checkLogin:',data);
+			return data;
 		},
-		FetchContent: ()=>{
-			fetch('https//renifysite.com/api/').then((res) => res.json()).then((res) => {return res}).catch(() 	=> {return false});
-			console.log('fetchContent:')
+		FetchContent: async ()=>{
+			const data = await axios_plus(HOST+CONTENT_ENDPOINT);
+			console.log('getContent:',data);
 			return data;
 		}
 	}
+}
+
+async function axios_plus(url,header = {}){
+	const data = header ? await fetch(url,header).then((res) => res.json()).then((res) => {return res}).catch(()=>{return false}) : await fetch(url).then((res) => res.json()).then((res) => {return res}).catch(()=>{return false});
+	return data;
 }
 
 export default Backend;

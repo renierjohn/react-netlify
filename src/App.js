@@ -1,5 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import List   from './components/List';
 import Admin  from './components/Admin';
 import Login  from './components/Login';
@@ -11,28 +12,22 @@ import StatusA from './api/Status';
 import Backend from './api/Backend';
 
 import { Routes, Route } from "react-router-dom";
-import React,{useState,useMemo} from 'react'
-
+import React,{useState,useMemo,useEffect} from 'react'
 
 function App() {
   const backend                       = Backend();
-  const [isLogin, setStatus]          = useState(backend.checkLogin());
-  const [dataContext, setDataContext] = useState(backend.FetchContent());
-  
+  const [isLogin, setStatus]          = useState(false);
+  const [dataContext, setDataContext] = useState([]);
+ 
+  useEffect(()=>{
+    backend.checkLogin().then((res)=>{setStatus(res)});
+    backend.FetchContent().then((res) =>{setDataContext(res)});
+  },[]);
+
   const value = useMemo(
     () => ({ isLogin, setStatus,dataContext,setDataContext  }), 
     [isLogin,dataContext]
   );
-
-  // const valueA = useMemo(
-  //   () => ({ isLogin, setStatus }), 
-  //   [isLogin]
-  // );
-
-  // const valueB = useMemo(
-  //   () => ({  dataContext,setDataContext }), 
-  //   [dataContext]
-  // );
 
   return (
       <div className="App">
@@ -40,10 +35,8 @@ function App() {
           <Header />
           <div className="container">
           <Routes>
-          {/*  <StatusB.Provider value={valueB} > */}
               <Route path="/" element={<List />} />
               <Route path="/admin" element={<Admin />} />
-           {/* </StatusB.Provider> */} 
               <Route path="/admin/add" element={<Form />} />
               <Route path="/admin/:id/edit" element={<Form />} />
               <Route path="/login" element={<Login />} />
