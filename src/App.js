@@ -21,11 +21,9 @@ function App() {
   const [isLogin, setStatus]          = useState(false);
   
   useEffect(()=>{
-  
     return(()=>{
       backend.checkLogin().then((res)=>{setStatus(res)});
       backend.FetchContent().then((res) =>{setDataContext(res)});
-
     })
      // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);

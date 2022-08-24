@@ -1,9 +1,10 @@
 import React,{ useContext,useState } from 'react'
 import Status  from '../api/Status';
+import Backend from '../api/Backend';
 
 function Login(){
-	
-	const statContext									 = useContext(Status);
+	const backend                      = Backend();
+	const statContext				   = useContext(Status);
 	const [defaultData,setDefaultData] = useState([]);
 
 	const disabled = statContext.isLogin ? 'disabled' : '';
@@ -13,12 +14,17 @@ function Login(){
 	}
 
 	function handleSubmit(){
-	  statContext.setStatus(true); // global state
-		console.log(defaultData)
+	  const response = backend.auth(defaultData);
+	  response.then((res)=>{
+	  	if(res.token){ 
+	  		statContext.setStatus(true);
+	  		localStorage.setItem('token',res.token);
+	  		localStorage.setItem('uid',res.userId)}
+	  		console.log('response login',res.token,res.userId);
+	  	})
+	 console.log(defaultData)
 	}
 
-	// console.log('login',statContext,disabled);
-	
 	return (
 		<>
 		<div className="container">

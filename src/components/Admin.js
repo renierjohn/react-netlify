@@ -1,16 +1,16 @@
 import React,{ useContext } from 'react'
 import { Link } from "react-router-dom";
 
-// import Backend from '../api/Backend';
+import Backend from '../api/Backend';
 import Status  from '../api/Status';
 
 function Admin(){
 	
-	// const backEnd     = Backend();
+	const backend     = Backend();
 	// const data        = backEnd.data;
 	const statContext = useContext(Status);
 
-	// console.log('admin',statContext)
+	console.log('admin',statContext)
 	
 	function handleDelete(e){
 		console.log(e.target.id)
@@ -34,8 +34,14 @@ function Admin(){
 					statContext.dataContext.map((data,key)=>{
 						return <li className="list-group-item shadow-sm p-3 mb-2 bg-body rounded" key={key} id={data.id}>
 						<div className="row"> 
-								<div className="col-8">
+								<div className="col-2">
 									{data.title}
+								</div>
+								<div className="col-2">
+									Php {data.price}
+								</div>
+								<div className="col-4">
+									<img src={`${backend.host}${data.image}`} alt={data.title} className="img-small" />
 								</div>
 								<div className="col-4">
 									<Link   className="btn btn-primary btn-lg m-1" to={`/admin/${data.id}/edit`}>EDIT</Link>
