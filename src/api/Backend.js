@@ -7,6 +7,7 @@ const data = [
 
 // const HOST             = 'http://localhost:8888';
 const HOST             = 'https://code-ph.com';
+// const HOST             = 'http://renify.local';
 
 const FILE_ENPOINT     = '/api/rest/file';
 const CONTENT_ENDPOINT = '/api/rest/products';
